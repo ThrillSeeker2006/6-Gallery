@@ -5,13 +5,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Checkpoint - Gallery</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
 </head>
 
 <body>
-  <a-box position="0 0 -4" height="5">
-    
-  </a-box>
+  <a-scene physics="gravity: -9.8; restitution: 0.1" inspector-plugin-recast>
+    <!--Entities-->
+    <a-assests>
+      <aassest-item id="myNavMesh" src="navmesh.gltf"></aassest-item>
+    </a-assests>
+    <!--Obstacles-->
+    <a-box id="podiumBase" position="0 0.5 -4" color="#92998d"></a-box>
+    <a-box id="podiumTop" position="0 1 -4" color="#92998d" scale="1.5 0.5 1.5"></a-box>
+    <a-plane id="floor" position="0 0 0" rotation="-90 0 0" src="wood.jpeg" scale="20 20 20"></a-plane>
+    <a-gltf-model src="#myNavMesh" nav-mesh position="0 0.1 0" visible="false"></a-gltf-model>
+    <!--Entities-->
+    <a-entity id="rig" position="0 0 2" movement-controls="constrainToNavMesh:true; speed: 0.5;">
+      <a-entity camera id="camera" position="0 1.6 0" look-controls="pointerLockEnabled:false" extended-wasd-controls="flyEnabled: true; turnEnabled: true; lookEnabled: true; maxLookAngle: 60;">
+      </a-entity>
+    </a-entity>
+  </a-scene>
 </body>
 
 </html>
